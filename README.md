@@ -1,37 +1,34 @@
 
-# Code-Switching Language Identification — Roman Urdu / English / MIX
+# Urdu OCR — Fine-Tuned TrOCR Model for Extracting Text from Urdu Images
 
-Identifies which language each word belongs to in mixed Roman Urdu-English sentences — a common way people actually text and write online in Pakistan.
+Reads Urdu Nastaliq text from images and converts it into digital, editable text.
 
 ## Why This Matters
 
-Most real-world text in Pakistan naturally switches between Roman Urdu and English within the same sentence (for example: "yaar mujhe ye assignment submit karna hai by tonight"). Standard NLP tools struggle with this kind of mixed text because they're built for one language at a time. This project labels each word as Urdu (URD), English (ENG), or Mixed (MIX), which is a foundational step for building better chatbots, translators, and text analysis tools for South Asian languages.
+Urdu Nastaliq script is one of the hardest scripts for OCR tools to read — the letters connect and change shape depending on position, and most existing OCR tools (like Tesseract) fail on it completely. This project builds a working OCR pipeline specifically trained for Urdu, so documents, books, and images in Urdu can finally be searched, edited, and translated digitally instead of staying stuck as static images.
 
-## Live Demo / Model
+## Live Demo
 
-Model on Hugging Face: https://huggingface.co/Fatimasajid/language-id-codesaviours-si26-fatima
+Try it here: https://urdu-ocr-codesaviours-si26-fatima-few8uhqbwx8w99hug2o4rb.streamlit.app/
+
+*(Deployed on Streamlit Community Cloud — Hugging Face Spaces free-tier limits blocked deployment there.)*
 
 ## How It Works
 
-A 200-sentence Roman Urdu-English code-switching dataset was created with word-level URD/ENG/MIX labels. An XLM-RoBERTa model was then fine-tuned on this dataset for token classification — meaning it looks at each word individually in a sentence and predicts which language it belongs to, rather than judging the sentence as a whole.
+The model is a fine-tuned version of TrOCR (`Hammad712/troce-urdu-model2-v1`), trained on over 10,000 synthetic Urdu images generated using Noto fonts, plus manually labeled real images. Tesseract (a common open-source OCR engine) was tested first but read 0 out of 5 Urdu Nastaliq test images correctly, which is why a custom fine-tuned model was necessary. The final model takes an image as input and outputs the Urdu text found in it.
 
 ## Results
 
-Strong F1 scores were achieved across all three label categories (URD, ENG, MIX) after fine-tuning.
+- Character Error Rate (CER): ~10.2%
+- Trained over 10 epochs on 10,000+ synthetic images plus real labeled samples
 
 ## How to Run Locally
 
 ```bash
-git clone https://github.com/fatimasajid31/code-switching-codesaviours-si26-fatima.git
-cd code-switching-codesaviours-si26-fatima
-pip install transformers torch
-```
-
-```python
-from transformers import AutoTokenizer, AutoModelForTokenClassification
-
-tokenizer = AutoTokenizer.from_pretrained("Fatimasajid/language-id-codesaviours-si26-fatima")
-model = AutoModelForTokenClassification.from_pretrained("Fatimasajid/language-id-codesaviours-si26-fatima")
+git clone https://github.com/fatimasajid31/urdu-ocr-codesaviours-si26-fatima.git
+cd urdu-ocr-codesaviours-si26-fatima
+pip install -r requirements.txt
+streamlit run streamlit_app.py
 ```
 
 ## Built By
