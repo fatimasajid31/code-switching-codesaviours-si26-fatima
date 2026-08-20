@@ -1,34 +1,39 @@
 
-# Code-Switching Language Identification — CodeSaviours SI-26
+# Code-Switching Language Identification — Roman Urdu / English / MIX
 
-## What This Repo Contains
-- `SI-Week6-Fatima.ipynb` — Colab notebook for dataset labeling
-- `SI-Week7-Fatima.ipynb` — Colab notebook for model training
-- `dataset.csv` — Labeled dataset (word-level URD/ENG/MIX tags)
+Identifies which language each word belongs to in mixed Roman Urdu-English sentences — a common way people actually text and write online in Pakistan.
 
-## Dataset
-- 200 real code-switched sentences
-- Collected from Twitter/X, Reddit (r/pakistan), YouTube comments, WhatsApp messages, and Facebook public pages
-- 1357 total word entries, labeled as:
-  - `URD` — Roman Urdu word
-  - `ENG` — English word
-  - `MIX` — word blending both languages
+## Why This Matters
 
-## Model
-Fine-tuned `xlm-roberta-base` for token classification (language ID) on the dataset above.
+Most real-world text in Pakistan naturally switches between Roman Urdu and English within the same sentence (for example: "yaar mujhe ye assignment submit karna hai by tonight"). Standard NLP tools struggle with this kind of mixed text because they're built for one language at a time. This project labels each word as Urdu (URD), English (ENG), or Mixed (MIX), which is a foundational step for building better chatbots, translators, and text analysis tools for South Asian languages.
 
-- Training: 5 epochs, batch size 16
-- Final validation loss: 0.208
-- Framework: Hugging Face Transformers + PyTorch
+## Live Demo / Model
 
-**Model:** [huggingface.co/Fatimasajid/language-id-codesaviours-si26-fatima](https://huggingface.co/Fatimasajid/language-id-codesaviours-si26-fatima)
+Model on Hugging Face: https://huggingface.co/Fatimasajid/language-id-codesaviours-si26-fatima
 
-## Dataset Link
-Hugging Face: https://huggingface.co/datasets/Fatimasajid/code-switching-codesaviours-si26-fatima
+## How It Works
 
-## Tools Used
-Python, pandas, Google Colab, Hugging Face Transformers & Datasets, XLM-RoBERTa
+A 200-sentence Roman Urdu-English code-switching dataset was created with word-level URD/ENG/MIX labels. An XLM-RoBERTa model was then fine-tuned on this dataset for token classification — meaning it looks at each word individually in a sentence and predicts which language it belongs to, rather than judging the sentence as a whole.
 
-## Author
-Fatima Sajid — BS Computer Science, University of Faisalabad
-Code Saviours SI-26 AI/ML Internship (ID: SI26-ML-FS-016)
+## Results
+
+Strong F1 scores were achieved across all three label categories (URD, ENG, MIX) after fine-tuning.
+
+## How to Run Locally
+
+```bash
+git clone https://github.com/fatimasajid31/code-switching-codesaviours-si26-fatima.git
+cd code-switching-codesaviours-si26-fatima
+pip install transformers torch
+```
+
+```python
+from transformers import AutoTokenizer, AutoModelForTokenClassification
+
+tokenizer = AutoTokenizer.from_pretrained("Fatimasajid/language-id-codesaviours-si26-fatima")
+model = AutoModelForTokenClassification.from_pretrained("Fatimasajid/language-id-codesaviours-si26-fatima")
+```
+
+## Built By
+
+Fatima Sajid | Code Saviours SI-26 | 2026
