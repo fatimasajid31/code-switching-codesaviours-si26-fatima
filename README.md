@@ -1,16 +1,20 @@
-
 # Code-Switching Language Identification — Roman Urdu / English / MIX
 
 Identifies which language each word belongs to in mixed Roman Urdu-English sentences — a common way people actually text and write online in Pakistan.
+
+## Demo Video
+
+[Watch the demo](https://www.loom.com/share/91d4d73a67e1457aaed53c2e86078aad)
 
 ## Why This Matters
 
 Most real-world text in Pakistan naturally switches between Roman Urdu and English within the same sentence (for example: "yaar mujhe ye assignment submit karna hai by tonight"). Standard NLP tools struggle with this kind of mixed text because they're built for one language at a time. This project labels each word as Urdu (URD), English (ENG), or Mixed (MIX), which is a foundational step for building better chatbots, translators, and text analysis tools for South Asian languages.
 
-## Live Demo / Model
+## Live Demo
 
-Model on Hugging Face: https://huggingface.co/Fatimasajid/language-id-codesaviours-si26-fatima
-https://huggingface.co/spaces/Fatimasajid/code-switching-demo
+Try it here: [Hugging Face Space](https://huggingface.co/spaces/Fatimasajid/code-switching-demo)
+
+Model page: [Fatimasajid/language-id-codesaviours-si26-fatima](https://huggingface.co/Fatimasajid/language-id-codesaviours-si26-fatima)
 
 ## How It Works
 
