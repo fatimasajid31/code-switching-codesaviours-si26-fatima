@@ -1,4 +1,4 @@
-[README_code_switching.md](https://github.com/user-attachments/files/31266174/README_code_switching.md)
+
 # Code-Switching Language Identification — Roman Urdu / English / MIX
 
 Identifies which language each word belongs to in mixed Roman Urdu-English sentences — a common way people actually text and write online in Pakistan.
@@ -10,6 +10,7 @@ Most real-world text in Pakistan naturally switches between Roman Urdu and Engli
 ## Live Demo / Model
 
 Model on Hugging Face: https://huggingface.co/Fatimasajid/language-id-codesaviours-si26-fatima
+https://huggingface.co/spaces/Fatimasajid/code-switching-demo
 
 ## How It Works
 
